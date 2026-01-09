@@ -5,16 +5,17 @@ from fastapi.responses import HTMLResponse
 from app.database import Base, engine
 from routers import users, rooms, messages, websocket_routes, auth_routers
 
-
-# ------------------- Create DB Tables -------------------
-Base.metadata.create_all(bind=engine)
-
 # ------------------- Initialize FastAPI App -------------------
 app = FastAPI(
-    title="🚀 Real-Time Chat Backend ",
+    title="🚀 Real-Time Chat Backend",
     version="1.0.0",
     description="FastAPI-based real-time chat backend with JWT Authentication and WebSocket support."
 )
+
+# ------------------- Create DB Tables (SAFE WAY) -------------------
+@app.on_event("startup")
+def startup_event():
+    Base.metadata.create_all(bind=engine)
 
 # ------------------- Include Routers -------------------
 app.include_router(users.router)
@@ -23,15 +24,12 @@ app.include_router(messages.router)
 app.include_router(auth_routers.router)
 app.include_router(websocket_routes.router)
 
-
-
 # ------------------- Root Endpoint -------------------
 @app.get("/")
 def root():
     return {"message": "🚀 Welcome to the Real-Time Chat Backend! Visit /docs."}
 
-
-# ------------------- Swagger Authorize Button (JWT BEARER) -------------------
+# ------------------- Swagger JWT Authorize Button -------------------
 def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
@@ -43,7 +41,6 @@ def custom_openapi():
         routes=app.routes,
     )
 
-    # JWT Bearer Token Support
     openapi_schema["components"]["securitySchemes"] = {
         "BearerAuth": {
             "type": "http",
@@ -52,19 +49,18 @@ def custom_openapi():
         }
     }
 
-    # Add security globally except login/register
     for path in openapi_schema["paths"]:
         if path not in ["/auth/login", "/auth/register"]:
             for method in openapi_schema["paths"][path]:
-                openapi_schema["paths"][path][method]["security"] = [{"BearerAuth": []}]
+                openapi_schema["paths"][path][method]["security"] = [
+                    {"BearerAuth": []}
+                ]
 
     app.openapi_schema = openapi_schema
     return app.openapi_schema
 
 
 app.openapi = custom_openapi
-
-
 
 # ------------------- WebSocket Test Page -------------------
 html = """
@@ -111,7 +107,6 @@ html = """
         }
     });
 </script>
-
 </body>
 </html>
 """
