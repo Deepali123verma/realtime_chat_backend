@@ -26,6 +26,7 @@ app.include_router(websocket_routes.router)
 
 # ------------------- Root Endpoint -------------------
 @app.get("/")
+@app.head("/")
 def root():
     return {"message": "🚀 Welcome to the Real-Time Chat Backend! Visit /docs."}
 
