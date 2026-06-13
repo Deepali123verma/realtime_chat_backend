@@ -37,12 +37,6 @@ http://localhost:8000
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
 
-## 🔌 WebSocket Endpoint
-
-```text
-ws://localhost:8000/ws
-```
-
 ## 👩‍💻 Author
 
 **Deepali Verma**
