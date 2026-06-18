@@ -1,4 +1,22 @@
-# Real-Time Chat Backend A real-time chat backend built using FastAPI, WebSockets, PostgreSQL, and Docker. The application enables instant communication between users through WebSocket connections while providing secure authentication, room management, and persistent message storage. ## 🚀 Features * ⚡ Real-time messaging with WebSockets * 🔐 JWT-based user authentication * 👥 User and chat room management * 🗄 PostgreSQL integration with SQLAlchemy ORM * 📦 RESTful APIs for users, rooms, and messages * 🐳 Dockerized for easy deployment * 📘 Interactive API documentation with Swagger (/docs) ## 🛠 Tech Stack * **Backend:** FastAPI, Python * **Database:** PostgreSQL, SQLAlchemy * **Communication:** WebSockets * **Authentication:** JWT * **Deployment:** Docker * **Server:** Uvicorn ## 📂 Project Structure
+Real-Time Chat Backend
+A real-time chat backend built using FastAPI, WebSockets, PostgreSQL, and Docker.
+The application enables instant communication between users through WebSocket connections while providing secure authentication, room management, and persistent message storage.
+🚀 Features 
+⚡ Real-time messaging with WebSockets
+🔐 JWT-based user authentication 
+👥 User and chat room management
+🗄 PostgreSQL integration with SQLAlchemy ORM 
+📦 RESTful APIs for users, rooms, and messages 
+🐳 Dockerized for easy deployment 
+📘 Interactive API documentation with Swagger (/docs)
+🛠 Tech Stack
+Backend: FastAPI, Python
+Database: PostgreSQL, SQLAlchemy
+Communication: WebSockets
+Authentication: JWT Deployment: 
+Docker Server: Uvicorn
+
+## 📂 Project Structure
 text
 realtime_chat_backend/
 ├── app/
